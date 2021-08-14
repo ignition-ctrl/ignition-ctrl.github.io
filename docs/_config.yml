@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   A personal website for publishing blogs and other tidbits. Powered by Jekyll and Github
   Pages.
 domain: myblog.deepdepths.online
-baseurl: "/docs/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ignition-ctrl.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: Placeholder
 github_username:  ignition-ctrl
