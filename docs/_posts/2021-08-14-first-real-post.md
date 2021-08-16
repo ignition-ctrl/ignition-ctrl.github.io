@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 author: Zack
 categories: posts
 ---
