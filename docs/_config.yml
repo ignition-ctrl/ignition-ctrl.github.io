@@ -26,10 +26,12 @@ github_username:  ignition-ctrl
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-cayman
+theme: minima
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
-
+minima:
+        skin: dark
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
