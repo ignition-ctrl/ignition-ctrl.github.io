@@ -2,7 +2,6 @@
 title: First Real Post
 layout: default
 author: Zack
-categories: posts
 ---
 <h1>{{ title }}</h1>
 So, this is my first real post on Jekyll. I'm learning the basics of Jekyll and Github Pages. 

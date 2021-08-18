@@ -1,6 +1,5 @@
 ---
-title: Customizing LightDM
+title: 
 layout: default
 author: Zack
-categories: placeholder
 ---
