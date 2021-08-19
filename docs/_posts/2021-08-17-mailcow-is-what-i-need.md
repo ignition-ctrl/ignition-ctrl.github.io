@@ -3,7 +3,7 @@ title: Mailcow Is What I Need!
 layout: default
 author: Zack
 ---
-<h1>{{ title }}</h1>
+<h1>{{ page.title }}</h1>
 Good morning, everyone. So, I forgot to post yesterday again. I spent all day at the Big Apple. Very fun, there's a restaurant called Clark's that has good breakfast. Anyways, yesterday, I was researching how to style the minima theme for Jekyll, and I came across someone's jekyll blog.
 [Slowbro Blog](https://blog.slowb.ro/mailcow-email-migration-from-postfix-dovecot-spamassassin/).
 This is Slowbro Blog, a blog owned by someone with a lot more experience than me.
