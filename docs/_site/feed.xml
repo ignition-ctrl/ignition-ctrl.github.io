@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://ignition-ctrl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ignition-ctrl.github.io/" rel="alternate" type="text/html" /><updated>2021-08-26T17:35:05-04:00</updated><id>https://ignition-ctrl.github.io/feed.xml</id><title type="html">My Blogs</title><subtitle>A personal website for publishing blogs and other tidbits. Powered by Jekyll and Github Pages.</subtitle><entry><title type="html">Hyperborean!</title><link href="https://ignition-ctrl.github.io/2021/08/24/Hyperborean!.html" rel="alternate" type="text/html" title="Hyperborean!" /><published>2021-08-24T00:00:00-04:00</published><updated>2021-08-24T00:00:00-04:00</updated><id>https://ignition-ctrl.github.io/2021/08/24/Hyperborean!</id><content type="html" xml:base="https://ignition-ctrl.github.io/2021/08/24/Hyperborean!.html">&lt;h1&gt;Hyperborean!&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://ignition-ctrl.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ignition-ctrl.github.io/" rel="alternate" type="text/html" /><updated>2021-08-30T00:29:13-04:00</updated><id>https://ignition-ctrl.github.io/feed.xml</id><title type="html">My Blogs</title><subtitle>A personal website for publishing blogs and other tidbits. Powered by Jekyll and Github Pages.</subtitle><entry><title type="html">Docker is Awesome (Another Rant)</title><link href="https://ignition-ctrl.github.io/2021/08/30/docker-rant.html" rel="alternate" type="text/html" title="Docker is Awesome (Another Rant)" /><published>2021-08-30T00:00:00-04:00</published><updated>2021-08-30T00:00:00-04:00</updated><id>https://ignition-ctrl.github.io/2021/08/30/docker-rant</id><content type="html" xml:base="https://ignition-ctrl.github.io/2021/08/30/docker-rant.html">&lt;h1&gt;Docker is Awesome (Another Rant)&lt;/h1&gt;
+
+&lt;p&gt;I just love Docker. I don’t know why. It’s the normie in me. There’s a desire for things to just work. A desire for something to do something well and conveniently.
+Docker just works, and it’s awesome. Now, I know that just pulling docker containers is taking the fun out of installing packages and managing config files, but I like how quickly things go.
+No more waiting for things to compile or researching the documentation, you can just set an environment variable or two and let the container do its magic. 
+Of course, the more complex the container is, the more work is required. The docker-compose file for my *arr stack is convoluted, to say the least. 
+I am just a big fan of it, the fact that containers are so easy to maintain, update, and manage. 
+For example, I just did somthing today incredibly easily. 
+I set up a komga ODPS server and downloaded 200~ comics. Now, I can use an ODPS client and read all of my preferred comics on the go. It was pretty simple.
+All I had to do was run a compose file for Komga. Here’s mine&lt;/p&gt;
+
+&lt;p&gt;version: ‘3.3’
+services:
+  komga:
+    image: gotson/komga
+    container_name: komga
+    volumes:
+      - type: bind
+        source: ./komga/config
+        target: /config
+      - type: bind
+        source: /mnt/comics
+        target: /data
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+        read_only: true
+    ports:
+      - 8080:8080
+    user: “1000:1000”
+    #environment:
+            #      - &lt;ENV_VAR&gt;=&lt;extra configuration=&quot;&quot;&gt;
+    restart: unless-stopped&lt;/extra&gt;&lt;/ENV_VAR&gt;&lt;/p&gt;
+
+&lt;p&gt;Simple, mostly copied from the github page. 
+Then, I used another docker container called “comic_dl” which allowed me to download entire comics from sites like readcomicsonline.li.
+comic_dl only downloads jpgs (thankfully, in numbered order) and komga accepts pdfs not jpgs. So, just use some imagemagick. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;convert *.jpg comic.pdf&lt;/code&gt;. 
+Now, all I do is write a simple Bash script which uses takes a link, downloads the jpgs, converts them into a pdf, and removes the originals. 
+However, copy and pasting hundreds of links from readcomicsonline.li would be annoying. If only there was some way to extract info from a website in an automated manner…&lt;/p&gt;
+
+&lt;p&gt;I used a python script, which (with some vim editing) provided an entire list of links that I could download.
+So, I just let it run and it downloaded a ton of files, nicely formatted for komga, and komga takes care of the rest. 
+That’s why I love docker.
+Because with docker, I can do a lot more&lt;/p&gt;</content><author><name>Zack</name></author><summary type="html">Docker is Awesome (Another Rant)</summary></entry><entry><title type="html">Hyperborean!</title><link href="https://ignition-ctrl.github.io/2021/08/24/Hyperborean!.html" rel="alternate" type="text/html" title="Hyperborean!" /><published>2021-08-24T00:00:00-04:00</published><updated>2021-08-24T00:00:00-04:00</updated><id>https://ignition-ctrl.github.io/2021/08/24/Hyperborean!</id><content type="html" xml:base="https://ignition-ctrl.github.io/2021/08/24/Hyperborean!.html">&lt;h1&gt;Hyperborean!&lt;/h1&gt;
 &lt;p&gt;So, I’m spending a short vacation in Canada! Having fun up here. I’ve always liked the cold.
 Anyways, in more interesting news, I’m considering doing the switch to Nginx. I’ve always used Apache2 for my webserver, but now it’s feeling outdated. I know it’s not outdated but the syntax for Nginx seems more modern. It’s also much more lightweight, and it would run better on my ancient server. I can even just use nginx proxy manager as a container, since all I’m really using Apache for is as a reverse proxy. Nginx, however, is the more recommended reverse proxy, and I would like to use it for the future. I am afraid of the change though. I have multiple configuration files, and I would have to rewrite them in nginx. I hate repeating myself. I know though it’s probably for the best. There’s also just the option of setting up nginx as a reverse proxy in docker-compose. I would have to combine all the docker-compose files in one giant one. This way, I can just add different networks for different services (or I guess I could keep them all in one) and have traefik or nginx manage them. Traefik seems interesting, but difficult. Its website says otherwise but I don’t trust what I’ve read. Also, I’m afraid of breaking the compose files by merging them. It would be nice though. Anyways, I’ll keep any readers posted. Literally.&lt;/p&gt;</content><author><name>Zack</name></author><summary type="html">Hyperborean! So, I’m spending a short vacation in Canada! Having fun up here. I’ve always liked the cold. Anyways, in more interesting news, I’m considering doing the switch to Nginx. I’ve always used Apache2 for my webserver, but now it’s feeling outdated. I know it’s not outdated but the syntax for Nginx seems more modern. It’s also much more lightweight, and it would run better on my ancient server. I can even just use nginx proxy manager as a container, since all I’m really using Apache for is as a reverse proxy. Nginx, however, is the more recommended reverse proxy, and I would like to use it for the future. I am afraid of the change though. I have multiple configuration files, and I would have to rewrite them in nginx. I hate repeating myself. I know though it’s probably for the best. There’s also just the option of setting up nginx as a reverse proxy in docker-compose. I would have to combine all the docker-compose files in one giant one. This way, I can just add different networks for different services (or I guess I could keep them all in one) and have traefik or nginx manage them. Traefik seems interesting, but difficult. Its website says otherwise but I don’t trust what I’ve read. Also, I’m afraid of breaking the compose files by merging them. It would be nice though. Anyways, I’ll keep any readers posted. Literally.</summary></entry><entry><title type="html">My Struggles With Self-Hosting</title><link href="https://ignition-ctrl.github.io/2021/08/18/my-struggles-with-selfhosting.html" rel="alternate" type="text/html" title="My Struggles With Self-Hosting" /><published>2021-08-18T00:00:00-04:00</published><updated>2021-08-18T00:00:00-04:00</updated><id>https://ignition-ctrl.github.io/2021/08/18/my-struggles-with-selfhosting</id><content type="html" xml:base="https://ignition-ctrl.github.io/2021/08/18/my-struggles-with-selfhosting.html">&lt;h1&gt;My Struggles With Self-Hosting&lt;/h1&gt;
 &lt;p&gt;Trying to set up a homelab is hard when you don’t have any income and you’re the only one who knows what you’re talking about. I managed to get my father’s old PC to convert it into a Linux server. Before, I had only used WSL and Linode servers. I watched a NetworkChuck video (in which he says you can get a Linode server free for a year &lt;em&gt;which is false&lt;/em&gt;) and decided to get a Linode server. I only used it to get familiar with Linux, and now I mostly work on my dualbooting 8-year old laptop. Still, the old PC is useful. It’s the first pure Linux machine I got. I started running some docker containers on it and it worked perfectly. Except for Plex. It’s way too old for Plex.&lt;/p&gt;

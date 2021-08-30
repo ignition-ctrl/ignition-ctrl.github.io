@@ -1,0 +1,57 @@
+---
+title: Docker is Awesome (Another Rant)
+layout: default
+author: Zack
+---
+<h1>{{ page.title }}</h1>
+
+I just love Docker. I don't know why. It's the normie in me. There's a desire for things to just work. A desire for something to do something well and conveniently.
+Docker just works, and it's awesome. Now, I know that just pulling docker containers is taking the fun out of installing packages and managing config files, but I like how quickly things go.
+No more waiting for things to compile or researching the documentation, you can just set an environment variable or two and let the container do its magic. 
+Of course, the more complex the container is, the more work is required. The docker-compose file for my *arr stack is convoluted, to say the least. 
+I am just a big fan of it, the fact that containers are so easy to maintain, update, and manage. 
+For example, I just did somthing today incredibly easily. 
+I set up a komga ODPS server and downloaded 200~ comics. Now, I can use an ODPS client and read all of my preferred comics on the go. It was pretty simple.
+All I had to do was run a compose file for Komga. Here's mine
+{% raw %}
+version: '3.3'
+services:
+  komga:
+    image: gotson/komga
+    container_name: komga
+    volumes:
+      - type: bind
+        source: ./komga/config
+        target: /config
+      - type: bind
+        source: /mnt/comics
+        target: /data
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+        read_only: true
+    ports:
+      - 8080:8080
+    user: "1000:1000"
+    #environment:
+            #      - <ENV_VAR>=<extra configuration>
+    restart: unless-stopped
+{% endraw %}
+Simple, mostly copied from the github page. 
+Then, I used another docker container called "comic_dl" which allowed me to download entire comics from sites like readcomicsonline.li.
+comic_dl only downloads jpgs (thankfully, in numbered order) and komga accepts pdfs not jpgs. So, just use some imagemagick. `convert *.jpg comic.pdf`. 
+Now, all I do is write a simple Bash script which uses takes a link, downloads the jpgs, converts them into a pdf, and removes the originals. 
+However, copy and pasting hundreds of links from readcomicsonline.li would be annoying. If only there was some way to extract info from a website in an automated manner...
+
+
+
+
+
+
+
+
+
+I used a python script, which (with some vim editing) provided an entire list of links that I could download.
+So, I just let it run and it downloaded a ton of files, nicely formatted for komga, and komga takes care of the rest. 
+That's why I love docker.
+Because with docker, I can do a lot more
