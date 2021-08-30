@@ -49,8 +49,7 @@ I am just a big fan of it, the fact that containers are so easy to maintain, upd
 For example, I just did somthing today incredibly easily. 
 I set up a komga ODPS server and downloaded 200~ comics. Now, I can use an ODPS client and read all of my preferred comics on the go. It was pretty simple.
 All I had to do was run a compose file for Komga. Here’s mine</p>
-
-<p>version: ‘3.3’
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3.3'
 services:
   komga:
     image: gotson/komga
@@ -68,11 +67,11 @@ services:
         read_only: true
     ports:
       - 8080:8080
-    user: “1000:1000”
+    user: "1000:1000"
     #environment:
-            #      - <ENV_VAR>=<extra configuration="">
-    restart: unless-stopped</extra></ENV_VAR></p>
-
+            #      - &lt;ENV_VAR&gt;=&lt;extra configuration&gt;
+    restart: unless-stopped
+</code></pre></div></div>
 <p>Simple, mostly copied from the github page. 
 Then, I used another docker container called “comic_dl” which allowed me to download entire comics from sites like readcomicsonline.li.
 comic_dl only downloads jpgs (thankfully, in numbered order) and komga accepts pdfs not jpgs. So, just use some imagemagick. <code class="language-plaintext highlighter-rouge">convert *.jpg comic.pdf</code>. 
